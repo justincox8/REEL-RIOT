@@ -10,8 +10,6 @@ conn = sqlite3.connect("media.db")
 cursor = conn.cursor()
 
 
-
-
 def fetch_books_for_theme(subject, count=20):
     i = 0
     url = f"https://openlibrary.org/subjects/{subject}.json"
@@ -44,9 +42,8 @@ def fetch_books_for_theme(subject, count=20):
                 "first_publish_year": first_publish_year,
             }
         )
-        i+=1
+        i += 1
         print(i)
-
     return books
 
 
@@ -69,6 +66,7 @@ def insert_books(books, theme):
     conn.commit()
 
 
+"""
 war = fetch_books_for_theme("war", count=100)
 western = fetch_books_for_theme("western", count=100)
 action = fetch_books_for_theme("action", count=100)
@@ -94,3 +92,8 @@ insert_books(mystery, "mystery")
 insert_books(science_fiction, "science_fiction")
 insert_books(thriller, "thriller")
 insert_books(romance, "romance")
+"""
+music = fetch_books_for_theme("music", 100)
+insert_books(music, "music")
+rock = fetch_books_for_theme("rock music", 30)
+insert_books(rock, "rock")
