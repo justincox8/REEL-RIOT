@@ -3,6 +3,11 @@ import os
 from dotenv import load_dotenv
 import sqlite3
 import time
+from sentence_transformers import SentenceTransformer
+import sentence_transformers
+import pandas as pd
+import numpy as np
+
 
 load_dotenv()
 movie_key = os.getenv("MOVIE_KEY")
@@ -65,7 +70,50 @@ def insert_books(books, theme):
         )
     conn.commit()
 
+import requests
 
+def fetch_single_book(title):
+    search_url = "https://openlibrary.org/search.json"
+    params = {"q": title, "limit": 1}
+    response = requests.get(search_url, params=params)
+    data = response.json()
+
+    if not data["docs"]:
+        return None
+
+    doc = data["docs"][0]
+    work_key = doc["key"]  # e.g. "/works/OL12345W"
+
+    details_url = f"https://openlibrary.org{work_key}.json"
+    details_response = requests.get(details_url)
+    details = details_response.json()
+
+    description = details.get("description", "")
+    if isinstance(description, dict):
+        description = description.get("value", "")
+
+    return {
+        "openlibrary_id": work_key,
+        "title": doc.get("title"),
+        "author": ", ".join(doc.get("author_name", [])),
+        "description": description,
+        "first_publish_year": doc.get("first_publish_year")
+    }
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+
+
+book = fetch_single_book("Johnny Got His Gun")
+if book:
+    insert_books([book], "war")
+new_book_text = book["description"]  # from the dict you just inserted
+new_embedding = model.encode([new_book_text])[0]  # [0] since encode expects/returns a list
+
+blob = np.array(new_embedding, dtype=np.float32).tobytes()
+conn.execute(
+    "UPDATE books SET embedding = ? WHERE openlibrary_id = ?",
+    (blob, book["openlibrary_id"])
+)
+conn.commit()
 """
 war = fetch_books_for_theme("war", count=100)
 western = fetch_books_for_theme("western", count=100)
@@ -92,8 +140,9 @@ insert_books(mystery, "mystery")
 insert_books(science_fiction, "science_fiction")
 insert_books(thriller, "thriller")
 insert_books(romance, "romance")
-"""
 music = fetch_books_for_theme("music", 100)
 insert_books(music, "music")
 rock = fetch_books_for_theme("rock music", 30)
-insert_books(rock, "rock")
+insert_books(rock, "rock")"""
+
+

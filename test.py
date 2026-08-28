@@ -3,6 +3,10 @@ import sentence_transformers
 import requests
 import os
 from dotenv import load_dotenv
+import sqlite3
+import pandas as pd
+import numpy as np
+
 
 """movie_titles = ["Interstellar","The Martian","JoJo Rabbit"]
 book_titles = ["A Farewell to Arms", "Beneath a Scarlet Sky","Sci-fi" ]
@@ -25,7 +29,7 @@ best_match = 0
 for i in range(sim_matrix.shape[0]):
     best_match = int(sim_matrix[i].argmax())
     print(f"best match for {movie_titles[i]} is {book_titles[best_match]} (score: {sim_matrix[i][best_match]:.4f})")"""
-load_dotenv()
+"""load_dotenv()
 movie_key = os.getenv("MOVIE_KEY")
 search_movie = input("movie: ")
 url = "https://api.themoviedb.org/3/search/movie"
@@ -36,4 +40,14 @@ response = requests.get(url, headers=headers, params=params)
 data = response.json()
 
 for movie in data["results"]:
-    print(f"{movie["title"]} - {movie["overview"]}")
+    print(f"{movie["title"]} - {movie["overview"]}")"""
+
+conn = sqlite3.connect("media.db")
+cursor = conn.cursor()
+
+cursor.execute("SELECT *  FROM movies;")
+conut = cursor.fetchall()
+table = pd.read_sql("SELECT * FROM movies;" ,conn)
+pdtable = pd.DataFrame(table)
+print(pdtable)
+print(table["title"])
