@@ -11,7 +11,7 @@ cursor = conn.cursor()
 def fetch_movies_for_theme(genre_id, count=100):
     discover_url = "https://api.themoviedb.org/3/discover/movie"
     movies = []
-    page = 1
+    page = 100
     while len(movies) < count:
         params = {
             "api_key": movie_key,

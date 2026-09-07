@@ -198,3 +198,203 @@ Hallelujah,Leonard Cohen,singer_songwriter,"The tangled relationship between des
 Tears in Heaven,Eric Clapton,singer_songwriter,"Grief over the death of his young son, questioning what an afterlife reunion would even feel like."
 Fire and Rain,James Taylor,singer_songwriter,Mourning a friend's death alongside personal struggles with addiction and mental health.
 American Pie,Don McLean,singer_songwriter,"Mourning the loss of rock and roll's early innocence, symbolically tied to the deaths of Buddy Holly and other musicians."
+title,artist,genre,theme
+Rockaway Beach,Ramones,punk,"Restless, carefree escapism, wanting nothing more than to get away and feel free of routine. Simple, propulsive energy over any deeper message."
+Ruby Soho,Rancid,punk,Longing and regret over a relationship that ended amid constant touring and instability. Restlessness underlies both the romance and the lifestyle around it.
+American Idiot,Green Day,punk,A pointed critique of media-driven conformity and blind nationalism in early-2000s America. Angry and explicitly political.
+Basket Case,Green Day,punk,Anxiety and self-doubt spiraling into a feeling of losing one's mind. Frantic energy mirrors the narrator's own instability.
+Pretty Vacant,Sex Pistols,punk,"Apathy and disdain toward societal expectations, embracing meaninglessness as a rejection of imposed values."
+God Save the Queen,Sex Pistols,punk,"A direct, confrontational attack on the British monarchy and the hollowness of institutional patriotism."
+Bodies,Sex Pistols,punk,"A raw, disturbing meditation on abortion and the visceral reality behind political abstraction. Deliberately shocking and confrontational."
+TV Party,Black Flag,punk,A satirical jab at mindless media consumption and apathetic escapism.
+Nervous Breakdown,Black Flag,punk,"Explosive frustration boiling over into total emotional collapse. Short, sharp, and unresolved."
+Search and Destroy,Iggy and the Stooges,punk,Reckless self-destruction reframed as a kind of weaponized identity. Aggressive and defiant.
+Los Angeles,X,punk,"A scathing, alienated portrait of the city's superficiality and moral emptiness."
+Enter Sandman,Metallica,metal,Childhood nightmares and the fear lurking beneath a comforting bedtime ritual. Unsettling rather than literal horror.
+Fade to Black,Metallica,metal,"Despair and suicidal ideation, portraying complete emotional exhaustion and the desire for it all to end."
+The Number of the Beast,Iron Maiden,metal,"Apocalyptic, occult imagery drawn from Biblical prophecy, used for dramatic effect rather than genuine advocacy."
+Run to the Hills,Iron Maiden,metal,"The colonization and displacement of Native Americans, told from both perspectives of conflict."
+Breaking the Law,Judas Priest,metal,Frustration and desperation driving someone toward crime after being failed by a system offering no opportunity.
+Ace of Spades,Motorhead,metal,Reckless gambling and living fast without fear of consequence or death.
+Angel of Death,Slayer,metal,"A horrifying, unflinching account of Nazi atrocities, presented without moral commentary to let the horror speak for itself."
+Chop Suey!,System of a Down,metal,"Wrestling with suicide, self-destruction, and questioning divine judgment of one's own choices."
+Killing in the Name,Rage Against the Machine,metal,"Rage against institutional racism and abuse of authority, particularly within law enforcement."
+Bodies (Drowning Pool),Drowning Pool,metal,"Raw aggression and physical release, largely mood and energy-driven rather than narrative."
+Blackened,Metallica,metal,Environmental destruction and humanity's self-inflicted apocalyptic ruin.
+Smells Like Teen Spirit,Nirvana,grunge,"Disaffected apathy and directionless teenage angst, deliberately resistant to a single clear meaning."
+Heart-Shaped Box,Nirvana,grunge,"Obsessive, painful romantic entanglement described through disturbing, visceral imagery."
+Jeremy,Pearl Jam,grunge,"A troubled, neglected teenager's isolation ending in tragedy, critiquing the adults who failed to notice."
+Yellow Ledbetter,Pearl Jam,grunge,"Grief and confusion, widely interpreted as mourning loss during wartime, though deliberately impressionistic."
+Rooster,Alice in Chains,grunge,A tribute to the songwriter's father's experience surviving the Vietnam War. Resilience amid trauma.
+Them Bones,Alice in Chains,grunge,Mortality and the inevitability of death looming over everyday life.
+Creep,Radiohead,grunge,Crushing self-loathing and feeling fundamentally unworthy of someone you admire from a distance.
+Plush,Stone Temple Pilots,grunge,"Disillusionment and searching for meaning within a fading, uncertain relationship."
+Cherub Rock,Smashing Pumpkins,grunge,Frustration with the music industry's commercialization and gatekeeping of authenticity.
+Today,Smashing Pumpkins,grunge,"Finding fragile hope and gratitude despite ongoing depression, deliberately contrasting upbeat melody with dark lyrics."
+Zombie,The Cranberries,grunge,Grief and outrage over the cycle of violence during the Northern Ireland conflict.
+Layla,Derek and the Dominos,classic_rock,"Desperate, unreciprocated love for a woman already committed to someone else."
+Whole Lotta Love,Led Zeppelin,classic_rock,"Unrestrained physical desire and passion, direct and unambiguous."
+Kashmir,Led Zeppelin,classic_rock,"A sweeping, mystical sense of journey and transcendence through vast, unfamiliar landscapes."
+Comfortably Numb,Pink Floyd,classic_rock,"Emotional detachment and numbness, medicated distance from one's own feelings and memories."
+Another Brick in the Wall,Pink Floyd,classic_rock,"Rebellion against oppressive, dehumanizing education systems that suppress individuality."
+Baba O'Riley,The Who,classic_rock,"Youthful restlessness and the desperate desire to escape a wasted, empty existence."
+Won't Get Fooled Again,The Who,classic_rock,"Disillusionment with revolutionary politics, recognizing that new leadership often just replaces old oppression."
+Born to Run,Bruce Springsteen,classic_rock,"Desperate hope for escape and a better life outside a trapped, dead-end hometown."
+Thunder Road,Bruce Springsteen,classic_rock,An invitation to leave behind disappointment and take a chance on an uncertain but hopeful future together.
+Sweet Home Alabama,Lynyrd Skynyrd,classic_rock,"Regional pride and defensive identity tied to the American South, amid broader cultural criticism."
+Go Your Own Way,Fleetwood Mac,classic_rock,Bitter resignation and blame following the end of a relationship.
+Livin' on a Prayer,Bon Jovi,classic_rock,Working-class struggle and romantic devotion enduring despite financial hardship.
+Old Time Rock and Roll,Bob Seger,classic_rock,"Nostalgic preference for simpler, earlier music over the trends of the present."
+Carry On Wayward Son,Kansas,classic_rock,"Exhaustion from a long, difficult struggle, paired with the hope that peace is finally within reach."
+Champagne Supernova,Oasis,britpop,"Hazy, nostalgic reflection on time, memory, and fleeting connection, deliberately dreamlike and abstract."
+Don't Look Back in Anger,Oasis,britpop,Choosing to release resentment and move forward rather than dwell on past grievances.
+Song 2,Blur,britpop,"Chaotic, ironic energy poking fun at grunge conventions, mostly mood over narrative meaning."
+Girls & Boys,Blur,britpop,"A satirical take on hedonistic, gender-blurred hookup culture among young vacationers."
+This Charming Man,The Smiths,britpop,Class anxiety and romantic vulnerability wrapped in wit and self-deprecation.
+There Is a Light That Never Goes Out,The Smiths,britpop,Romantic devotion so intense that even death alongside a loved one feels preferable to loneliness.
+Bittersweet Symphony,The Verve,britpop,"Feeling trapped by circumstance and mortality, yet finding a strange peace within that inevitability."
+Chasing Cars,Snow Patrol,britpop,"A desire to shut out the world and exist purely in a quiet, intimate moment with someone."
+Time to Pretend,MGMT,britpop,"Ironic commentary on fame and excess, imagining a hedonistic rockstar life while knowing it's ultimately hollow."
+Electric Feel,MGMT,britpop,"Dreamy, sensory infatuation and attraction described through surreal, electric imagery."
+Float On,Modest Mouse,britpop,"Resilient optimism, choosing to stay afloat and hopeful despite a string of bad luck."
+Gin and Juice,Snoop Dogg,hip_hop,"Carefree celebration of partying and indulgence, laid-back rather than aggressive."
+California Love,2Pac,hip_hop,A celebratory anthem of West Coast pride and hedonistic freedom.
+Hypnotize,The Notorious B.I.G.,hip_hop,"Confident bravado about wealth, status, and success after years of struggle."
+Nuthin' but a G Thang,Dr. Dre & Snoop Dogg,hip_hop,Laid-back celebration of West Coast lifestyle and effortless cool.
+Rapper's Delight,The Sugarhill Gang,hip_hop,"Joyful, playful boasting widely credited as one of hip-hop's foundational commercial tracks."
+The Real Slim Shady,Eminem,hip_hop,"Satirical commentary on celebrity culture and media hypocrisy, delivered through provocative humor."
+99 Problems,Jay-Z,hip_hop,"Navigating racial profiling, legal scrutiny, and public misconceptions about personal struggles."
+Empire State of Mind,Jay-Z,hip_hop,"A love letter to New York City as a place of ambition, opportunity, and resilience."
+All of the Lights,Kanye West,hip_hop,"Fame, family breakdown, and public scrutiny colliding with personal regret."
+Jesus Walks,Kanye West,hip_hop,Reconciling personal faith with the material excess and violence often glorified in hip-hop.
+Money Trees,Kendrick Lamar,hip_hop,Growing up amid poverty and crime while chasing the promise of financial escape.
+My Girl,The Temptations,rnb_soul,"Pure, uncomplicated joy and gratitude for a loving relationship."
+I Heard It Through the Grapevine,Marvin Gaye,rnb_soul,Anguish and suspicion upon learning of a partner's infidelity through rumor rather than confrontation.
+"Signed, Sealed, Delivered I'm Yours",Stevie Wonder,rnb_soul,"Total, joyful devotion and commitment to a partner."
+At Last,Etta James,rnb_soul,Relief and fulfillment after a long search finally leading to real love.
+Un-Break My Heart,Toni Braxton,rnb_soul,Desperate longing for a broken relationship to be restored.
+No One,Alicia Keys,rnb_soul,"Steadfast reassurance that no outside force can break a strong, committed love."
+Halo,Beyonce,rnb_soul,"Overwhelming, almost spiritual adoration for someone who feels transformative to be around."
+Crazy in Love,Beyonce,rnb_soul,Losing composure and self-control entirely under the intensity of new infatuation.
+Adorn,Miguel,rnb_soul,"Tender, devoted admiration for a partner, intimate and understated."
+Redbone,Childish Gambino,rnb_soul,"A warning to stay alert and vigilant within a relationship, layered with themes of paranoia and trust."
+Try a Little Tenderness,Otis Redding,rnb_soul,"An appeal for patience and gentleness in how we treat those we love, especially amid life's hardships."
+Friends in Low Places,Garth Brooks,country_folk,"Defiant working-class pride in the face of an ex's more affluent, judgmental world."
+Achy Breaky Heart,Billy Ray Cyrus,country_folk,"Lighthearted heartbreak, asking to be let down gently rather than devastated."
+Man! I Feel Like a Woman!,Shania Twain,country_folk,"Playful, confident celebration of independence and femininity."
+Before He Cheats,Carrie Underwood,country_folk,Vengeful satisfaction in retaliating against a cheating partner.
+The Devil Went Down to Georgia,The Charlie Daniels Band,country_folk,A folkloric contest of skill and pride between a young man and the devil himself.
+Jackson,Johnny Cash and June Carter Cash,country_folk,"Playful bickering and mutual teasing within a long, comfortable relationship."
+Sunday Morning Coming Down,Kris Kristofferson,country_folk,"Quiet loneliness and regret experienced during an empty, hungover Sunday."
+The Weight,The Band,country_folk,Weariness and the burden of responsibility placed on someone by those around them.
+Helplessly Hoping,"Crosby, Stills & Nash",country_folk,Two people longing for connection but too uncertain to voice it directly to each other.
+Take It Easy,Eagles,country_folk,A carefree embrace of uncertainty and letting worries go while on the road.
+Ripple,Grateful Dead,country_folk,"A gentle meditation on wisdom, guidance, and the personal nature of one's own path."
+Wake Me Up,Avicii,electronic,"Youthful uncertainty about identity and direction, hoping clarity comes with time."
+Animals,Martin Garrix,electronic,"Pure instrumental intensity and euphoric build, mood-driven with no narrative content."
+Get Lucky,Daft Punk,electronic,Carefree romantic pursuit and the thrill of a good night unfolding.
+"Harder, Better, Faster, Stronger",Daft Punk,electronic,"Repetitive, mechanized determination and self-improvement, delivered with deliberate robotic detachment."
+Insomnia,Faithless,electronic,"Restless, anxious wakefulness and the inability to quiet one's own mind."
+Silent Shout,The Knife,electronic,"Eerie, unsettling atmosphere evoking isolation and psychological disturbance."
+Windowlicker,Aphex Twin,electronic,"Deliberately unsettling, satirical take on club culture and hypermasculine bravado, largely instrumental in tone."
+One (Your Name),Swedish House Mafia,electronic,"Euphoric unity and connection on the dance floor, transcending individual identity."
+Don't You Worry Child,Swedish House Mafia,electronic,Nostalgic reassurance recalling a parent's comforting words during uncertain times.
+Scary Monsters and Nice Sprites,Skrillex,electronic,"Aggressive, chaotic energy built almost entirely around instrumental intensity rather than lyrical content."
+Bangarang,Skrillex,electronic,"High-energy, celebratory chaos, mood and rhythm-driven above all else."
+Round Midnight,Thelonious Monk,jazz_blues,"Late-night melancholy and solitary introspection, instrumental and moody."
+A Love Supreme,John Coltrane,jazz_blues,"A spiritual offering of gratitude and devotion, expressed through instrumental exploration rather than words."
+Feeling Good,Nina Simone,jazz_blues,"Liberation and renewal, embracing a fresh start with confidence."
+Sinnerman,Nina Simone,jazz_blues,"Desperate flight from judgment and reckoning, rooted in themes of guilt and spiritual accountability."
+Mack the Knife,Bobby Darin,jazz_blues,"A charming, unsettling narrative about a charismatic but dangerous criminal."
+What a Wonderful World,Louis Armstrong,jazz_blues,"Simple, sincere appreciation for life's beauty despite the world's hardships."
+St. James Infirmary Blues,Traditional,jazz_blues,"Grief and mortality, mourning a loved one's death with resigned sorrow."
+Freddie Freeloader,Miles Davis,jazz_blues,"A relaxed, playful instrumental character study rendered entirely through tone and rhythm."
+Autumn Leaves,Jazz standard,jazz_blues,"Wistful reflection on lost love, using seasonal change as a metaphor for endings."
+Ain't Misbehavin',Fats Waller,jazz_blues,"Playful, loyal devotion to a partner while resisting temptation elsewhere."
+Stormy Weather,Lena Horne,jazz_blues,Deep sorrow and heartbreak expressed through weather as emotional metaphor.
+Jamming,Bob Marley,reggae_ska,Joyful unity and celebration through music and shared rhythm.
+Could You Be Loved,Bob Marley,reggae_ska,"An earnest appeal for connection and mutual love, hopeful and inviting."
+Is This Love,Bob Marley,reggae_ska,Tender uncertainty and hope at the start of a new romance.
+Pass the Dutchie,Musical Youth,reggae_ska,"Communal sharing and camaraderie, using a coded reference reframed for broader accessibility."
+Rivers of Babylon,Boney M.,reggae_ska,"Longing for home and freedom while living in exile, rooted in Biblical imagery."
+54-46 Was My Number,Toots and the Maytals,reggae_ska,"Personal injustice and wrongful imprisonment, turned into a defiant anthem."
+Pressure Drop,Toots and the Maytals,reggae_ska,A warning that consequences eventually catch up with wrongdoing.
+Uprising,Bob Marley,reggae_ska,A call for spiritual and political resistance against oppression.
+Rat Race,Bob Marley,reggae_ska,Weary disdain for pointless political and social competition.
+Simmer Down,Bob Marley & The Wailers,reggae_ska,A call for calm and restraint amid rising tensions in the community.
+Concrete Jungle,Bob Marley,reggae_ska,"Alienation and hardship of urban poverty, longing for a gentler, more connected existence."
+Boogie Wonderland,"Earth, Wind & Fire",disco_funk,Joyful escapism through music and dance as a refuge from loneliness.
+Y.M.C.A.,Village People,disco_funk,"Camaraderie and community, framed through a specific, celebratory institution."
+Disco Inferno,The Trammps,disco_funk,Pure celebratory chaos and release on the dance floor.
+Super Freak,Rick James,disco_funk,"Playful, unapologetic embrace of unconventional sexuality and confidence."
+Get Down Tonight,KC and the Sunshine Band,disco_funk,"Uncomplicated romantic and physical desire, urgent and joyful."
+Celebration,Kool & the Gang,disco_funk,"Pure communal joy, marking any occasion worth celebrating together."
+Kiss,Prince,disco_funk,"Playful, confident flirtation, valuing personality and presence over materialism."
+Funkytown,Lipps Inc.,disco_funk,Restless desire to escape a place that feels dull in search of something more vibrant.
+Car Wash,Rose Royce,disco_funk,"Finding joy and camaraderie even within mundane, low-wage work."
+Word Up!,Cameo,disco_funk,"Playful, confident bravado wrapped in danceable energy."
+Jungle Boogie,Kool & the Gang,disco_funk,"Pure rhythmic celebration, mood and groove over any narrative meaning."
+Total Praise,Richard Smallwood,gospel,Overwhelming gratitude and worship directed toward divine strength and support.
+I'll Fly Away,Traditional,gospel,Anticipation of spiritual freedom and release from earthly suffering after death.
+Go Down Moses,Traditional spiritual,gospel,"A demand for liberation from bondage, rooted in the Exodus story and echoing themes of slavery."
+Down by the Riverside,Traditional,gospel,Rejecting violence and conflict in favor of peace and spiritual renewal.
+"Swing Low, Sweet Chariot",Traditional,gospel,"Longing for deliverance and comfort amid hardship, using the imagery of being carried home."
+Nobody Knows the Trouble I've Seen,Traditional,gospel,Private suffering known fully only to oneself and the divine.
+Blessed Assurance,Traditional hymn,gospel,Confident faith and reassurance in salvation.
+This Little Light of Mine,Traditional,gospel,A determination to let one's own goodness and faith be visible despite adversity.
+Oh When the Saints,Traditional,gospel,Joyful anticipation of spiritual community and celebration.
+His Banner Over Me,Traditional,gospel,Comfort in feeling claimed and protected by divine love.
+Great Is Thy Faithfulness,Traditional hymn,gospel,"Gratitude for steady, unwavering divine faithfulness through changing seasons of life."
+La Vida Es Un Carnaval,Celia Cruz,latin,An affirmation that life's hardships are worth celebrating rather than mourning.
+Bidi Bidi Bom Bom,Selena,latin,"Playful, giddy infatuation and butterflies at the start of attraction."
+Suavemente,Elvis Crespo,latin,"Sensual, rhythmic romantic desire expressed through dance."
+Corazon Espinado,Santana ft. Mana,latin,Heartbreak and betrayal described through the metaphor of a thorn-pierced heart.
+Chan Chan,Buena Vista Social Club,latin,Nostalgic storytelling and romance rooted in traditional Cuban culture.
+Cielito Lindo,Traditional Mexican,latin,Comforting encouragement to stay joyful despite sadness.
+Guantanamera,Traditional Cuban,latin,National pride and poetic reflection on simplicity and sincerity.
+Chayanne - Torero,Chayanne,latin,"Bold, passionate romantic pursuit framed through the imagery of a bullfighter's confidence."
+El Cantante,Hector Lavoe,latin,The emotional toll of performing joy for others while privately suffering.
+Smooth,Santana ft. Rob Thomas,latin,"Passionate, all-consuming romantic infatuation."
+Bailamos,Enrique Iglesias,latin,Losing oneself in the moment of dance and romantic connection.
+First Love,Hikaru Utada,japanese_intl,Tender nostalgia for a formative early romance that still lingers emotionally.
+Kimi no Na wa (Sparkle),RADWIMPS,japanese_intl,"A yearning, fated connection between two people separated by time and circumstance."
+Again,YUI,japanese_intl,Resolve to move forward and rebuild after emotional hardship.
+Unravel,TK from Ling tosite sigure,japanese_intl,"Psychological unraveling and identity confusion, intense and unsettled in tone."
+Kaikai Kitan,Eve,japanese_intl,"Grief and determination intertwined, channeling loss into forward motion."
+Homura,LiSA,japanese_intl,"Resolve and sorrow intertwined, drawing strength from painful memory to keep moving forward."
+Butter-Fly,Koji Wada,japanese_intl,Youthful determination and adventurous optimism.
+Guren no Yumiya,Linked Horizon,japanese_intl,"Defiant resistance and the will to fight against overwhelming, oppressive forces."
+Silhouette,KANA-BOON,japanese_intl,Searching for one's true self and place amid uncertainty.
+Blue Bird,Ikimono-gakari,japanese_intl,Breaking free of constraint to pursue freedom and self-determination.
+Blinding Lights,The Weeknd,modern_pop,"Desperate, sleepless longing for connection amid isolation and excess."
+Levitating,Dua Lipa,modern_pop,"Weightless joy and infatuation, playful and unburdened."
+Watermelon Sugar,Harry Styles,modern_pop,"Sensory, carefree physical attraction and summer romance."
+Sign of the Times,Harry Styles,modern_pop,"Anxious uncertainty about the future amid a chaotic, uncertain world."
+"Thank U, Next",Ariana Grande,modern_pop,"Reframing past heartbreaks as growth rather than regret, ending in self-love."
+Bad Romance,Lady Gaga,modern_pop,"All-consuming, obsessive love that persists despite its destructive nature."
+Poker Face,Lady Gaga,modern_pop,"Concealing true feelings and vulnerability behind a composed, unreadable exterior."
+Happy,Pharrell Williams,modern_pop,"Unfiltered, contagious joy and gratitude."
+Roar,Katy Perry,modern_pop,Reclaiming personal power and voice after being silenced or overlooked.
+Chandelier,Sia,modern_pop,Using reckless partying to numb deeper pain and avoid confronting it directly.
+Stressed Out,Twenty One Pilots,modern_pop,Anxiety about adulthood and nostalgia for the simplicity of childhood.
+Yesterday,The Beatles,singer_songwriter,"Grief over a lost relationship and longing for a simpler, happier past."
+Blackbird,The Beatles,singer_songwriter,"Encouragement and hope for someone overcoming hardship and finding freedom, often read in the context of the civil rights movement."
+"Vincent (Starry, Starry Night)",Don McLean,singer_songwriter,A tender tribute to Vincent van Gogh's genius and the world's failure to understand his suffering.
+The Night We Met,Lord Huron,singer_songwriter,Aching regret and the desire to return to a pivotal moment before everything changed.
+To Build a Home,The Cinematic Orchestra,singer_songwriter,Loss and the lingering emotional weight of a home and life left behind.
+Motion Sickness,Phoebe Bridgers,singer_songwriter,"Complicated resentment toward an ex, mixing anger with lingering attachment."
+I Will Follow You into the Dark,Death Cab for Cutie,singer_songwriter,"Devotion so complete it extends beyond death itself, skeptical of any afterlife but faithful to love regardless."
+The Scientist,Coldplay,singer_songwriter,"Regret and the desire to undo mistakes made in a relationship, wishing to start over."
+Bridge Over Troubled Water,Simon & Garfunkel,singer_songwriter,Unconditional support and comfort offered to someone during their hardest moments.
+America,Simon & Garfunkel,singer_songwriter,"Restless searching for identity and belonging while traveling across a vast, uncertain country."
+Both Sides Now,Joni Mitchell,singer_songwriter,Reflecting on how experience reshapes and complicates once-simple views of love and life.
+Iris,Goo Goo Dolls,singer_songwriter,Desperate longing to be truly seen and understood by someone you love.
+Wonderful Tonight,Eric Clapton,singer_songwriter,"Quiet, devoted admiration for a partner in an ordinary, tender moment."
+Free Fallin',Tom Petty,singer_songwriter,Detached reflection on a breakup and drifting aimlessly afterward.
+Africa,Toto,singer_songwriter,"A romanticized, almost mythic longing for a distant place and person."
+Total Eclipse of the Heart,Bonnie Tyler,singer_songwriter,Overwhelming emotional darkness and vulnerability within a turbulent relationship.
+I Want to Know What Love Is,Foreigner,singer_songwriter,Sincere searching for authentic connection after being disillusioned by past relationships.
+Don't Stop Believin',Journey,singer_songwriter,"Perseverance and hope for a better future despite ordinary, difficult circumstances."
+Panama,Van Halen,singer_songwriter,"Carefree, exuberant celebration of speed, freedom, and excess."
+Jump,Van Halen,singer_songwriter,Encouragement to take a risk and seize an opportunity despite fear.
+The Chain,Fleetwood Mac,singer_songwriter,Fractured trust and resentment within a group bound together despite personal betrayal.
