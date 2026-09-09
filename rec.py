@@ -84,6 +84,32 @@ def rate_top_matches(source_type, source_idx, target_type):
         """, (source_id, source_type, int(target_df["id"][idx]), target_type, score, rank, int(label)))
     conn.commit()
 
-# Example usage:
-for i in range(40):
-    rate_top_matches("movie", i, "book")
+def rate_mixed_matches(source_type, source_idx, target_type):
+    sim_matrix, source_df, target_df = sim_lookup[(source_type, target_type)]
+    source_title = source_df["title"][source_idx]
+    source_id = int(source_df["id"][source_idx])
+
+    all_sorted_idxs = np.argsort(-np.array(sim_matrix[source_idx]))
+
+    # Take top 3 (likely good) + a few from far down the list (likely bad)
+    sample_idxs = list(all_sorted_idxs[:3]) + list(all_sorted_idxs[-3:])
+
+    print(f"\n=== {source_title} ({source_type}) ===")
+    for idx in sample_idxs:
+        idx = int(idx)
+        title = target_df["title"][idx]
+        score = float(sim_matrix[source_idx][idx])
+        print(f"{title} (score: {score:.4f})")
+        label = input("   Good match? (1=yes, 0=no): ").strip()
+        while label not in ("0", "1"):
+            label = input("   Please enter 1 or 0: ").strip()
+        cur.execute("""
+            INSERT OR IGNORE INTO ratings 
+            (source_id, source_media_type, candidate_id, candidate_media_type, cosine_score, rank_position, label)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (source_id, source_type, int(target_df["id"][idx]), target_type,
+              score, int(np.where(all_sorted_idxs == idx)[0][0]) + 1, int(label)))
+    conn.commit()
+
+for i in range(50, 100):
+    rate_mixed_matches("movie", i, "book")

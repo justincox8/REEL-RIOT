@@ -38,7 +38,7 @@ ratings_df = pd.concat([movie_candidates, book_candidates], ignore_index=True)
 ratings_df = ratings_df.rename(columns={"theme": "candidate_theme", "sentiment": "candidate_sentiment"})
 
 ratings_df["sentiment_diff"] = (ratings_df["source_sentiment"] - ratings_df["candidate_sentiment"]).abs()
-
+print(ratings_df.groupby("label")["sentiment_diff"].describe())
 feature_cols = ["cosine_score", "rank_position", "sentiment_diff"]
 X = ratings_df[feature_cols]
 y = ratings_df["label"]
