@@ -3,6 +3,7 @@ import sqlite3
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
+import joblib
 
 conn = sqlite3.connect("media.db")
 
@@ -37,9 +38,8 @@ book_candidates = ratings_df[ratings_df["candidate_media_type"] == "book"].merge
 ratings_df = pd.concat([movie_candidates, book_candidates], ignore_index=True)
 ratings_df = ratings_df.rename(columns={"theme": "candidate_theme", "sentiment": "candidate_sentiment"})
 
-ratings_df["sentiment_diff"] = (ratings_df["source_sentiment"] - ratings_df["candidate_sentiment"]).abs()
-print(ratings_df.groupby("label")["sentiment_diff"].describe())
-feature_cols = ["cosine_score", "rank_position", "sentiment_diff"]
+
+feature_cols = ["cosine_score", "rank_position"]
 X = ratings_df[feature_cols]
 y = ratings_df["label"]
 
@@ -52,3 +52,8 @@ predictions = reranker.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, predictions))
 print(classification_report(y_test, predictions))
 print(reranker.coef_)
+
+reranker.fit(X,y)
+joblib.dump(reranker, "reranker_model.pkl")
+print("Final model trained on:", len(X), "samples")
+print("Saved to reranker.pkl")
