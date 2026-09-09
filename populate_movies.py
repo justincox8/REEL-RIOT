@@ -54,7 +54,7 @@ mystery =  fetch_movies_for_theme(9648)
 scienc_fiction =  fetch_movies_for_theme(878)
 thriller =  fetch_movies_for_theme(53)
 war =  fetch_movies_for_theme(752)
-documentary =  fetch_movies_for_theme(99)
+
 romance =  fetch_movies_for_theme(49)
 
 insert_movies(western, "western")
@@ -68,7 +68,6 @@ insert_movies(mystery, "mystery")
 insert_movies(scienc_fiction, "science_fiction")
 insert_movies(thriller, "thriller")
 insert_movies(war, "war")
-insert_movies(documentary, "documentary")
 insert_movies(romance, "romance")
 
 
