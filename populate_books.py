@@ -114,19 +114,19 @@ conn.execute(
     (blob, book["openlibrary_id"])
 )
 conn.commit()
-"""
-war = fetch_books_for_theme("war", count=100)
-western = fetch_books_for_theme("western", count=100)
-action = fetch_books_for_theme("action", count=100)
-adventure = fetch_books_for_theme("adventure", count=100)
-comedy = fetch_books_for_theme("comedy", count=100)
-crime = fetch_books_for_theme("crime", count=100)
-fantasy = fetch_books_for_theme("fantasy", count=100)
-horror = fetch_books_for_theme("horror", count=100)
-mystery = fetch_books_for_theme("mystery", count=100)
-science_fiction = fetch_books_for_theme("science_fiction", count=100)
-thriller = fetch_books_for_theme("thriller", count=100)
-romance = fetch_books_for_theme("romance", count=100)
+
+war = fetch_books_for_theme("war", count=300)
+western = fetch_books_for_theme("western", count=300)
+action = fetch_books_for_theme("action", count=300)
+adventure = fetch_books_for_theme("adventure", count=300)
+comedy = fetch_books_for_theme("comedy", count=300)
+crime = fetch_books_for_theme("crime", count=300)
+fantasy = fetch_books_for_theme("fantasy", count=300)
+horror = fetch_books_for_theme("horror", count=300)
+mystery = fetch_books_for_theme("mystery", count=300)
+science_fiction = fetch_books_for_theme("science_fiction", count=300)
+thriller = fetch_books_for_theme("thriller", count=300)
+romance = fetch_books_for_theme("romance", count=300)
 
 insert_books(war, "war")
 insert_books(western, "western")
@@ -140,9 +140,6 @@ insert_books(mystery, "mystery")
 insert_books(science_fiction, "science_fiction")
 insert_books(thriller, "thriller")
 insert_books(romance, "romance")
-music = fetch_books_for_theme("music", 100)
-insert_books(music, "music")
-rock = fetch_books_for_theme("rock music", 30)
-insert_books(rock, "rock")"""
+
 
 

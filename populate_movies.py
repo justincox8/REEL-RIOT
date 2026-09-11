@@ -11,7 +11,7 @@ cursor = conn.cursor()
 def fetch_movies_for_theme(genre_id, count=100):
     discover_url = "https://api.themoviedb.org/3/discover/movie"
     movies = []
-    page = 100
+    page = 1
     while len(movies) < count:
         params = {
             "api_key": movie_key,
@@ -43,19 +43,19 @@ def insert_movies(movies, theme):
             movie["vote_count"]
         ))
     conn.commit()
-western = fetch_movies_for_theme(37)
-action =  fetch_movies_for_theme(12)
-adventure =  fetch_movies_for_theme(16)
-comedy =  fetch_movies_for_theme(18)
-crime =  fetch_movies_for_theme(80)
-fantasy =  fetch_movies_for_theme(14)
-horror =  fetch_movies_for_theme(27)
-mystery =  fetch_movies_for_theme(9648)
-scienc_fiction =  fetch_movies_for_theme(878)
-thriller =  fetch_movies_for_theme(53)
-war =  fetch_movies_for_theme(752)
+western = fetch_movies_for_theme(37, count=400)
+action =  fetch_movies_for_theme(12, count=400)
+adventure =  fetch_movies_for_theme(16, count=400)
+comedy =  fetch_movies_for_theme(18, count=400)
+crime =  fetch_movies_for_theme(80, count=400)
+fantasy =  fetch_movies_for_theme(14, count=400)
+horror =  fetch_movies_for_theme(27, count=400)
+mystery =  fetch_movies_for_theme(9648, count=400)
+scienc_fiction =  fetch_movies_for_theme(878, count=400)
+thriller =  fetch_movies_for_theme(53, count=400)
+war =  fetch_movies_for_theme(752, count=400)
 
-romance =  fetch_movies_for_theme(49)
+romance =  fetch_movies_for_theme(49, count=400)
 
 insert_movies(western, "western")
 insert_movies(action, "action")
