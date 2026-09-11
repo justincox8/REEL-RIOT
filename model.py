@@ -37,9 +37,26 @@ book_candidates = ratings_df[ratings_df["candidate_media_type"] == "book"].merge
 )
 ratings_df = pd.concat([movie_candidates, book_candidates], ignore_index=True)
 ratings_df = ratings_df.rename(columns={"theme": "candidate_theme", "sentiment": "candidate_sentiment"})
+movies_lookup = pd.read_sql_query("SELECT id, theme FROM movies", conn)
+books_lookup = pd.read_sql_query("SELECT id, theme FROM books", conn)
 
+# Recompute hub scores fresh here too (or store them in the DB — see note below)
+# For now assume movies_df/books_df with hub_score are already loaded, same as in rec.py
 
-feature_cols = ["cosine_score", "rank_position"]
+movies_lookup = pd.read_sql_query("SELECT id, hub_score FROM movies", conn)
+books_lookup = pd.read_sql_query("SELECT id, hub_score FROM books", conn)
+
+# Merge candidate hub_score onto ratings_df (candidate could be movie or book)
+movie_candidates = ratings_df[ratings_df["candidate_media_type"] == "movie"].merge(
+    movies_lookup[["id", "hub_score"]], left_on="candidate_id", right_on="id", suffixes=("", "_cand")
+)
+book_candidates = ratings_df[ratings_df["candidate_media_type"] == "book"].merge(
+    books_lookup[["id", "hub_score"]], left_on="candidate_id", right_on="id", suffixes=("", "_cand")
+)
+ratings_df = pd.concat([movie_candidates, book_candidates], ignore_index=True)
+ratings_df = ratings_df.rename(columns={"hub_score": "candidate_hub_score"})
+
+feature_cols = ["cosine_score", "rank_position", "candidate_hub_score"]
 X = ratings_df[feature_cols]
 y = ratings_df["label"]
 
@@ -57,3 +74,5 @@ reranker.fit(X,y)
 joblib.dump(reranker, "reranker_model.pkl")
 print("Final model trained on:", len(X), "samples")
 print("Saved to reranker.pkl")
+
+print(ratings_df.groupby("label")["candidate_hub_score"].describe())

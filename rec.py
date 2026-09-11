@@ -45,6 +45,39 @@ sim_lookup = {
     ("book", "movie"): (adjusted_book_to_movie_sim, books_df, movies_df),
 }
 
+def find_idx(df, title):
+    matches = df[df["title"].str.contains(title, case=False, na=False)]
+    if matches.empty:
+        print(f"No match found for '{title}'")
+        return None
+    return matches.index[0]
+
+def rate_specific_book_against_movies(book_title, movie_indices, label=0):
+    book_idx = find_idx(books_df, book_title)
+    if book_idx is None:
+        return
+    book_id = int(books_df["id"][book_idx])
+    book_display_title = books_df["title"][book_idx]
+
+    # Full ranking of this book's similarity across ALL movies, to get its true rank per movie
+    book_to_movie_row = np.array(adjusted_movie_to_book_sim.T[book_idx])
+    sorted_movie_idxs = np.argsort(-book_to_movie_row)
+
+    for movie_idx in movie_indices:
+        movie_id = int(movies_df["id"][movie_idx])
+        movie_title = movies_df["title"][movie_idx]
+        score = float(book_to_movie_row[movie_idx])
+        rank = int(np.where(sorted_movie_idxs == movie_idx)[0][0]) + 1
+
+        print(f"{book_display_title} vs {movie_title} — cosine={score:.4f}, rank={rank}, labeling as {label}")
+
+        cur.execute("""
+            INSERT OR IGNORE INTO ratings 
+            (source_id, source_media_type, candidate_id, candidate_media_type, cosine_score, rank_position, label)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (movie_id, "movie", book_id, "book", score, rank, label))
+
+    conn.commit()
 
 def recommend_with_model(source_type, source_idx, target_type, n=3):
     sim_matrix, source_df, target_df = sim_lookup[(source_type, target_type)]
@@ -57,14 +90,11 @@ def recommend_with_model(source_type, source_idx, target_type, n=3):
 
     for rank, idx in enumerate(all_sorted_idxs, start=1):
         idx = int(idx)
-
         cosine_score = float(sim_matrix[source_idx][idx])
+        candidate_hub_score = float(target_df.iloc[idx]["hub_score"])
+        features.append([cosine_score, rank, candidate_hub_score])
 
-        # MUST match the features used during model training
-        features.append([cosine_score, rank])
-
-    # Convert to numpy array
-    X = pd.DataFrame(features, columns=["cosine_score", "rank_position"])
+    X = pd.DataFrame(features, columns=["cosine_score", "rank_position", "candidate_hub_score"])
 
     # Model prediction
     predictions = model.predict(X)
@@ -96,6 +126,22 @@ def recommend_with_model(source_type, source_idx, target_type, n=3):
             f"model_probability={probability:.4f})"
         )
 
+# Find some movie indices to test against — pick a spread of genres unrelated to these books
+unrelated_movie_titles = ["Jaws", "28 Years Later", "Hungry", "Return to Silent Hill", "Saccharine"]
+unrelated_movie_idxs = [find_idx(movies_df, t) for t in unrelated_movie_titles]
+unrelated_movie_idxs = [i for i in unrelated_movie_idxs if i is not None]
 
-for i in range(200, 250):
+rate_specific_book_against_movies("Beast Quest", unrelated_movie_idxs, label=0)
+rate_specific_book_against_movies("Wet Magic", unrelated_movie_idxs, label=0)
+rate_specific_book_against_movies("Frenchman's Creek", unrelated_movie_idxs, label=0)
+
+book_hub_scores = movie_to_book_sim.mean(axis=0)  # one number per book
+movie_hub_scores = movie_to_book_sim.mean(axis=1)
+books_df["hub_score"] = np.array(book_hub_scores)
+movies_df["hub_score"] = np.array(movie_hub_scores)
+
+
+
+for i in range(400):
     recommend_with_model("movie", i, "book", n=5)
+
