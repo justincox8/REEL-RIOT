@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>REEL RIOT — Media Recommender</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+  <div class="grain"></div>
+
+  <main class="shell">
+
+```
+<header class="hero">
+
+  <div class="sticker">LOUD MATCHES<br>ONLY</div>
+
+  <p class="eyebrow">/// PERSONAL MEDIA RERANKER ///</p>
+
+  <h1>REEL<br><span>RIOT</span></h1>
+
+  <p class="tagline">Find the next thing that hits.</p>
+
+</header>
+
+<section class="search-card">
+
+  <div class="card-label">01 / PICK YOUR POISON</div>
+
+  <form id="search-form">
+
+    <div class="search-row">
+
+      <input
+        id="query"
+        name="q"
+        type="search"
+        autocomplete="off"
+        placeholder="Search a movie or book..."
+        aria-label="Movie or book title"
+        required
+      >
+
+      <button type="submit">RIOT →</button>
+
+    </div>
+
+  </form>
+
+  <div id="suggestions" class="suggestions"></div>
+
+</section>
+
+<section id="status" class="status hidden"></section>
+
+<section id="results" class="results hidden">
+
+  <div class="results-heading">
+
+    <div>
+
+      <div class="card-label">02 / YOUR MATCH</div>
+
+      <h2 id="source-title"></h2>
+
+      <p id="source-meta"></p>
+
+    </div>
+
+    <div class="arrow-mark">✦</div>
+
+  </div>
+
+  <div class="recommendation-header">
+
+    <span>RECOMMENDATIONS</span>
+
+    <span>RERANKED</span>
+
+  </div>
+
+  <div id="recommendations" class="recommendations"></div>
+
+</section>
+
+<footer>
+
+  <span>RAPIDFUZZ × EMBEDDINGS × RERANKER</span>
+
+  <span>NO ALGORITHM APOLOGIES</span>
+
+</footer>
+```
+
+  </main>
+
+<script>
+
+const form = document.getElementById("search-form");
+const input = document.getElementById("query");
+const suggestions = document.getElementById("suggestions");
+const results = document.getElementById("results");
+const statusBox = document.getElementById("status");
+const recs = document.getElementById("recommendations");
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+form.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  const q = input.value.trim();
+
+  if (!q) return;
+
+  suggestions.innerHTML = "";
+
+  results.classList.add("hidden");
+
+  statusBox.classList.remove("hidden");
+
+  statusBox.innerHTML =
+    `<span class="pulse"></span> DIGGING THROUGH THE STACK...`;
+
+  recs.innerHTML = "";
+
+  try {
+
+    const response = await fetch(
+      `/api/recommend?q=${encodeURIComponent(q)}&n=5`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "Recommendation engine failed."
+      );
+    }
+
+    if (!data.source) {
+
+      statusBox.innerHTML =
+        `NO CLEAN MATCH. Try another title`;
+
+      return;
+    }
+
+    statusBox.classList.add("hidden");
+
+    results.classList.remove("hidden");
+
+    document.getElementById("source-title").textContent =
+      data.source.title;
+
+    document.getElementById("source-meta").textContent =
+      data.source.type.toUpperCase();
+
+    recs.innerHTML = (data.recommendations || [])
+      .map(item => {
+
+        const author =
+          item.type === "book" && item.author
+            ? `<div class="rec-author">${escapeHtml(item.author)}</div>`
+            : "";
+
+        return `
+          <article class="rec">
+
+            <div class="rank">
+              ${String(item.rank).padStart(2, "0")}
+            </div>
+
+            <div class="rec-main">
+
+              <div class="rec-type">
+                ${escapeHtml(item.type)}
+              </div>
+
+              <h3>
+                ${escapeHtml(item.title)}
+              </h3>
+
+              ${author}
+
+            </div>
+
+            <div class="rec-score">
+
+              <strong>${item.score}%</strong>
+
+              <small>MODEL MATCH</small>
+
+            </div>
+
+          </article>
+        `;
+
+      })
+      .join("");
+
+    results.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  } catch (error) {
+
+    statusBox.innerHTML =
+      `ERROR: ${escapeHtml(error.message)}`;
+
+  }
+
+});
+
+</script>
+
+</body>
+
+</html>

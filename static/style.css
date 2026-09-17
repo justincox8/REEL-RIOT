@@ -1,0 +1,313 @@
+
+:root {
+  --black: #101010;
+  --cream: #f2ead7;
+  --red: #e3262e;
+  --border: 3px solid var(--cream);
+  --shadow: 7px 7px 0 var(--red);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--black);
+  color: var(--cream);
+  font-family: "Space Mono", monospace;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .045;
+  background-image:
+    linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .055;
+  z-index: 10;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+.shell {
+  width: min(1080px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 48px 0 28px;
+}
+
+.hero {
+  position: relative;
+  min-height: 370px;
+  padding: 30px 0 30px;
+}
+
+.eyebrow, .card-label, footer, .recommendation-header, .rec-type {
+  letter-spacing: .13em;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.eyebrow {
+  color: var(--red);
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+
+h1, h2, h3, p { margin-top: 0; }
+
+h1 {
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(6rem, 18vw, 13rem);
+  line-height: .72;
+  letter-spacing: -.025em;
+  margin: 38px 0 28px;
+  transform: rotate(-2deg);
+  text-shadow: 10px 10px 0 var(--red);
+}
+
+h1 span {
+  color: var(--red);
+  text-shadow: 8px 8px 0 var(--cream);
+}
+
+.tagline {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  border-left: 7px solid var(--red);
+  padding-left: 14px;
+  max-width: 500px;
+}
+
+.sticker {
+  position: absolute;
+  right: 4%;
+  top: 30px;
+  width: 130px;
+  height: 130px;
+  border: var(--border);
+  background: var(--red);
+  color: var(--black);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-weight: 700;
+  transform: rotate(8deg);
+  box-shadow: 6px 6px 0 var(--cream);
+}
+
+.search-card {
+  border: var(--border);
+  padding: 28px;
+  background: var(--red);
+  color: var(--black);
+  box-shadow: var(--shadow);
+  transform: rotate(.4deg);
+  margin-bottom: 58px;
+}
+
+.search-card .card-label { margin-bottom: 16px; }
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+  border: 3px solid var(--black);
+  background: var(--cream);
+  color: var(--black);
+  padding: 18px 17px;
+  font: 700 1rem "Space Mono", monospace;
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 5px 5px 0 var(--black);
+}
+
+button {
+  border: 3px solid var(--black);
+  background: var(--black);
+  color: var(--cream);
+  padding: 0 25px;
+  font: 700 .95rem "Space Mono", monospace;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--cream);
+  color: var(--black);
+}
+
+.suggestions {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.suggestion {
+  min-height: 45px;
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  padding: 9px 12px;
+  background: var(--cream);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+.suggestion .type {
+  color: var(--red);
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.suggestion b { font-size: .72rem; }
+
+.status {
+  border: var(--border);
+  padding: 20px;
+  margin-bottom: 35px;
+  color: var(--red);
+}
+
+.pulse {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--red);
+  margin-right: 9px;
+  animation: blink .6s infinite alternate;
+}
+
+@keyframes blink { to { opacity: .2; } }
+
+.hidden { display: none; }
+
+.results {
+  padding: 10px 0 30px;
+}
+
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: var(--border);
+  padding-bottom: 25px;
+}
+
+.results-heading h2 {
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: .9;
+  text-transform: uppercase;
+  max-width: 800px;
+  margin: 12px 0 10px;
+  word-break: break-word;
+}
+
+#source-meta { margin: 0; color: var(--red); }
+
+.arrow-mark {
+  font-size: 4rem;
+  color: var(--red);
+  transform: rotate(12deg);
+}
+
+.recommendation-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--cream);
+  padding: 13px 0;
+  margin-top: 8px;
+}
+
+.recommendations { display: grid; }
+
+.rec {
+  display: grid;
+  grid-template-columns: 85px 1fr 140px;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 0;
+  border-bottom: 2px solid rgba(242,234,215,.35);
+  transition: transform .15s ease, padding-left .15s ease;
+}
+
+.rec:hover {
+  transform: rotate(-.5deg);
+  padding-left: 10px;
+}
+
+.rank {
+  font-family: Anton, Impact, sans-serif;
+  color: var(--red);
+  font-size: 2.6rem;
+}
+
+.rec h3 {
+  margin: 3px 0 0;
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  text-transform: uppercase;
+  line-height: .95;
+}
+
+.rec-type { color: var(--red); }
+
+.rec-score {
+  text-align: right;
+}
+
+.rec-score strong {
+  display: block;
+  font-family: Anton, Impact, sans-serif;
+  font-size: 2rem;
+  color: var(--red);
+}
+
+.rec-score small { font-size: .58rem; }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: var(--border);
+  padding-top: 18px;
+  margin-top: 35px;
+}
+
+@media (max-width: 650px) {
+  .shell { width: min(100% - 24px, 1080px); padding-top: 20px; }
+  .hero { min-height: 320px; }
+  .sticker { width: 95px; height: 95px; font-size: .65rem; right: 0; }
+  h1 { font-size: clamp(5rem, 25vw, 8rem); margin-top: 55px; }
+  .search-card { padding: 20px; }
+  .search-row { grid-template-columns: 1fr; }
+  button { min-height: 54px; }
+  .rec { grid-template-columns: 50px 1fr; gap: 10px; }
+  .rec-score { grid-column: 2; text-align: left; }
+  footer { flex-direction: column; }
+}
+.rec-author {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
