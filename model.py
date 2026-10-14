@@ -1,4 +1,6 @@
+from transformers import pipeline
 import pandas as pd
+import numpy as np
 import sqlite3
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -6,14 +8,15 @@ from sklearn.metrics import accuracy_score, classification_report
 import joblib
 
 conn = sqlite3.connect("media.db")
+cursor = conn.cursor()
 
 ratings_df = pd.read_sql_query("""
     SELECT * FROM ratings 
     WHERE source_media_type IN ('movie', 'book') 
     AND candidate_media_type IN ('movie', 'book')
 """, conn)
-print(ratings_df.shape)
-print(ratings_df["label"].value_counts())
+#print(ratings_df.shape)
+#print(ratings_df["label"].value_counts())
 
 movies_df = pd.read_sql_query("SELECT id, theme, sentiment FROM movies", conn)
 books_df = pd.read_sql_query("SELECT id, theme, sentiment FROM books", conn)
@@ -76,3 +79,4 @@ print("Final model trained on:", len(X), "samples")
 print("Saved to reranker.pkl")
 
 print(ratings_df.groupby("label")["candidate_hub_score"].describe())
+
