@@ -8,10 +8,9 @@ The project is currently in active development and is designed to run locally or
 
 ## Demo
 
-<!-- Add these images after creating docs/images/:
+
 ![REEL RIOT interface](docs/images/reel-riot-screenshot.png)
 ![REEL RIOT recommendation demo](docs/images/reel-riot-demo.gif)
--->
 
 *Screenshots and a short demo GIF will be added here.*
 
