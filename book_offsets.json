@@ -1,14 +1,14 @@
 {
-    "war": 20,
-    "western": 10,
-    "action": 20,
-    "adventure": 20,
-    "comedy": 20,
-    "crime": 20,
-    "fantasy": 10,
-    "horror": 20,
-    "mystery": 20,
-    "science_fiction": 10,
-    "thriller": 20,
-    "romance": 10
+    "war": 40,
+    "western": 20,
+    "action": 30,
+    "adventure": 30,
+    "comedy": 30,
+    "crime": 30,
+    "fantasy": 15,
+    "horror": 30,
+    "mystery": 30,
+    "science_fiction": 15,
+    "thriller": 30,
+    "romance": 15
 }
