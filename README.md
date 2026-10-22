@@ -8,7 +8,9 @@ The project is under active development and is designed to run locally or on a s
 
 ## Demo
 
-Demo assets are organized in `docs/images/`. Add screenshots or a GIF here using their actual filenames when you want to display them in the README.
+![REEL RIOT interface](docs/images/reel-riot-screenshot.png)
+
+![REEL RIOT recommendation demo](docs/images/reel-riot-demo.gif)
 
 ## Features
 
