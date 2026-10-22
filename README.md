@@ -12,7 +12,7 @@ The project is under active development and is intended to run locally or on a s
 
 ![REEL RIOT recommendation demo](docs/images/reel-riot-demo.gif)
 
-> If these images are not present in the repository yet, add them at the paths above or remove the image references until they are available.
+
 
 ## Features
 
