@@ -12,7 +12,10 @@ from pathlib import Path
 
 load_dotenv()
 movie_key = os.getenv("MOVIE_KEY")
-conn = sqlite3.connect("media.db")
+BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
+DB_FILE = PROJECT_ROOT / "media.db"
+conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
 BASE_DIR = Path(__file__).resolve().parent
 OFFSETS_FILE = BASE_DIR / "book_offsets.json"
