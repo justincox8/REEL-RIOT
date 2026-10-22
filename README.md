@@ -2,79 +2,70 @@
 
 **Find your next favorite book through a movie — or your next favorite movie through a book.**
 
-REEL RIOT is a cross-media recommendation system that connects movies and books using semantic similarity and machine-learning reranking. Built with Python and FastAPI, it combines natural-language embeddings, hubness correction, fuzzy title matching, and a trained model to discover relationships between different forms of media.
+REEL RIOT is a cross-media recommendation system that connects movies and books using semantic similarity and machine-learning reranking. It combines text embeddings, hubness correction, fuzzy title matching, and a trained ranking model to find meaningful connections across media.
 
-The project is currently in active development and is designed to run locally or on a self-hosted server.
+The project is under active development and is intended to run locally or on a self-hosted server.
 
 ## Demo
 
-
 ![REEL RIOT interface](docs/images/reel-riot-screenshot.png)
+
 ![REEL RIOT recommendation demo](docs/images/reel-riot-demo.gif)
 
 
 ## Features
 
-- **Cross-media discovery:** Find books related to a movie and movies related to a book.
-- **Semantic embeddings:** Represent media descriptions as numerical vectors using Sentence Transformers.
-- **Hubness correction:** Adjust similarity scores to account for candidates that appear broadly similar across the catalog.
-- **Fuzzy title matching:** Identify titles despite partial input or differences in wording using RapidFuzz.
-- **Machine-learning reranking:** Reorder similarity-based candidates using a trained model and candidate features.
-- **Incremental catalog ingestion:** Retrieve books from Open Library and movies from TMDB by subject or genre.
-- **Persistent pagination:** Track catalog progress in JSON offset files between ingestion runs.
-- **Embedding maintenance:** Recalculate stored embeddings after catalog updates.
-- **Web interface and API:** Search for titles and request recommendations through a FastAPI application.
+- **Cross-media recommendations:** Discover books related to a movie and movies related to a book.
+- **Semantic search:** Use Sentence Transformers embeddings to represent media descriptions as vectors.
+- **Hubness correction:** Adjust similarity scores to reduce the influence of candidates that appear similar to many items.
+- **Fuzzy title matching:** Find titles from partial or slightly different input with RapidFuzz.
+- **Machine-learning reranking:** Refine the initial candidate order using a trained model and candidate features.
+- **Catalog ingestion:** Fetch book metadata from Open Library and movie metadata from TMDB.
+- **Incremental updates:** Store pagination progress in JSON offset files between ingestion runs.
+- **Embedding refresh:** Recalculate embeddings when the catalog changes.
+- **Web app and API:** Use the FastAPI application to search titles and request recommendations.
 
-## Architecture
+## How It Works
 
-The application separates the user-facing API, recommendation pipeline, persistent catalog, and data-ingestion workflow.
+REEL RIOT follows a pipeline from title matching to ranked recommendations:
+
+1. **Match the input title.** RapidFuzz compares the submitted title with titles in the catalog.
+2. **Identify the source item.** The application determines the matching title and whether it is a movie or a book.
+3. **Find candidates.** The system compares the source item's embedding with items in the opposite media category.
+4. **Adjust similarity scores.** Hubness correction modifies the raw similarity scores.
+5. **Rerank candidates.** The trained model uses candidate features to refine the recommendation order.
+6. **Return recommendations.** The API returns the matched source item and the ranked results.
+
+### Architecture
 
 ```mermaid
 flowchart TD
-    User["User"] --> Web["FastAPI Web Interface"]
-    User --> API["Search / Recommendation API"]
-
-    Web --> API
-    API --> Match["RapidFuzz Title Matching"]
+    User["User"] --> App["FastAPI Web App / API"]
+    App --> Match["Fuzzy Title Matching"]
     Match --> Source["Matched Movie or Book"]
-
     Source --> Similarity["Embedding Similarity"]
-    DB[("SQLite Catalog<br/>Movies · Books · Embeddings")] --> Similarity
-
-    Similarity --> Hub["Hubness-Corrected Scores"]
+    DB[("SQLite Catalog<br/>Movies, Books, Embeddings")] --> Similarity
+    Similarity --> Hub["Hubness Correction"]
     Hub --> Features["Candidate Features"]
     Features --> Ranker["Trained Reranking Model"]
     Ranker --> Results["Ranked Recommendations"]
-    Results --> API
-    API --> User
+    Results --> App
 
     OpenLibrary["Open Library API"] --> Books["Book Ingestion"]
     TMDB["TMDB API"] --> Movies["Movie Ingestion"]
-
     Books --> DB
     Movies --> DB
-
-    Offsets["Persistent JSON Offsets"] --> Books
+    Offsets["JSON Pagination Offsets"] --> Books
     Offsets --> Movies
-
     DB --> Recalc["Embedding Recalculation"]
     Recalc --> DB
 ```
 
-### Recommendation pipeline
+### Catalog Maintenance
 
-1. **Match the input:** RapidFuzz compares the supplied title against the available movie and book catalogs.
-2. **Load the source item:** The system identifies the matching title and its media type.
-3. **Compare embeddings:** The recommendation pipeline compares the source item's embedding against candidates in the opposite media category.
-4. **Correct similarity scores:** Hubness correction adjusts the raw similarity scores.
-5. **Rerank candidates:** The trained model evaluates candidate features to produce the final recommendation order.
-6. **Return results:** The API returns the matched source and ranked recommendations.
+The ingestion scripts fetch metadata from Open Library and TMDB. JSON offset files preserve pagination progress between runs. After adding records, the embedding recalculation script refreshes stored vectors.
 
-### Catalog maintenance pipeline
-
-The ingestion scripts retrieve additional metadata from Open Library and TMDB. Persistent offsets allow subsequent runs to continue from the previously recorded position. The embedding recalculation script then refreshes the stored vectors for the catalog.
-
-Embedding regeneration and recommendation-ranking regeneration are separate operations.
+Embedding regeneration and recommendation-model training or ranking-data regeneration are separate operations; refreshing embeddings does not automatically retrain the reranker.
 
 ## Technology Stack
 
@@ -83,83 +74,58 @@ Embedding regeneration and recommendation-ranking regeneration are separate oper
 | Backend | Python, FastAPI, Uvicorn |
 | Frontend | HTML, CSS, JavaScript, Jinja2 |
 | Database | SQLite |
-| Embeddings | Sentence Transformers, `all-mpnet-base-v2` |
-| Similarity and numerical processing | NumPy, pandas |
+| Text embeddings | Sentence Transformers, `all-mpnet-base-v2` |
+| Numerical processing | NumPy, pandas |
 | Title matching | RapidFuzz |
 | Machine learning | scikit-learn, Joblib |
 | Movie metadata | TMDB API |
 | Book metadata | Open Library API |
 | Dependency management | uv |
 
-## Project Structure
-
-```text
-mediarec/
-├── app.py                 # FastAPI application and API endpoints
-├── rec.py                 # Matching, similarity, and recommendation logic
-├── model.py               # Additional model-related functionality
-├── recalc.py              # Embedding regeneration
-├── populate_books.py      # Open Library ingestion
-├── populate_movies.py     # TMDB ingestion
-├── update.sh              # Catalog update pipeline
-├── book_offsets.json      # Book pagination progress
-├── movie_offsets.json     # Movie pagination progress
-├── reranker_model.pkl     # Trained reranking model
-├── songs.csv              # Song metadata
-├── media.db               # Local SQLite catalog; required at runtime
-├── pyproject.toml         # Project configuration and dependencies
-├── uv.lock                # Locked dependency versions
-├── requirements.txt       # Alternative dependency list
-├── src/mediarecs/         # Python package source
-├── templates/             # Jinja2 HTML templates
-└── static/                # CSS and frontend assets
-```
-
-The database and trained model are runtime dependencies. A fresh clone should not be assumed to contain a ready-to-use catalog.
-
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.14 or a version supported by the current project configuration
+- Python version supported by the project configuration
 - [uv](https://docs.astral.sh/uv/)
 - A compatible SQLite database containing the expected tables and embeddings
 - The trained `reranker_model.pkl` file
+- A TMDB API key if you plan to ingest movie metadata
 
-A TMDB API key is additionally required to run the movie ingestion script.
+**Important:** A fresh clone may not include a ready-to-use database or trained model. The database schema, stored embeddings, and model file must be compatible with the current code.
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/justincox8/mediarec.git
-cd mediarec
+git clone https://github.com/justincox8/REEL-RIOT.git
+cd REEL-RIOT
 ```
 
-### 2. Install dependencies
+If the repository's directory or default branch differs, use the clone URL and directory shown on the GitHub page.
+
+### 2. Install Dependencies
 
 ```bash
 uv sync
 ```
 
-### 3. Prepare the runtime files
+### 3. Prepare Runtime Files
 
-Place a compatible `media.db` in the project root. Ensure it contains the expected movie and book records, embedding columns, and any additional columns required by the recommendation pipeline.
+Place a compatible `media.db` in the location expected by the application and ensure it contains the required movie and book records, embedding columns, and any other columns used by the recommendation pipeline.
 
-Make the compatible `reranker_model.pkl` available at the path expected by `rec.py`.
+Make the compatible `reranker_model.pkl` available at the path expected by the code. Check the database and model paths in the application before starting it.
 
-The application is not yet a self-contained, out-of-the-box deployment: the database schema, stored embeddings, and trained model must be compatible with the current code.
+### 4. Configure TMDB (for Movie Ingestion)
 
-### 4. Configure TMDB access
-
-Create a `.env` file in the project root if you intend to fetch movie metadata:
+Create a `.env` file in the project root:
 
 ```dotenv
 MOVIE_KEY=your_tmdb_api_key
 ```
 
-Keep API credentials private and do not commit `.env` to Git.
+Keep API credentials private. Do not commit `.env` or other secrets to Git.
 
-### 5. Start the application
+### 5. Start the Application
 
 From the repository root, run:
 
@@ -167,21 +133,21 @@ From the repository root, run:
 uv run uvicorn app:app --reload
 ```
 
-Open the local application at:
+Then open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-The `--reload` flag is intended for development.
+The `--reload` option is intended for development, not production deployment. If the application entry point or ASGI object has a different name in the current checkout, adjust the command accordingly.
 
 ## API Endpoints
 
+The following endpoints describe the current documented API. Confirm them against `app.py` if the implementation changes.
+
 ### `GET /api/search`
 
-Find a matching movie or book title.
+Search for a movie or book title.
 
 | Parameter | Description |
 |---|---|
-| `q` | Title or partial title to search for |
+| `q` | Full or partial title to search for |
 
 Example:
 
@@ -189,16 +155,16 @@ Example:
 GET /api/search?q=animal%20farm
 ```
 
-A successful match includes the media type, title, and source index. If no match is found, the response indicates that no source was identified.
+A successful response identifies the matched title, its media type, and its source index. If no title matches, the response indicates that no source item was found.
 
 ### `GET /api/recommend`
 
-Generate recommendations from the opposite media category.
+Get recommendations from the opposite media category.
 
 | Parameter | Description |
 |---|---|
 | `q` | Movie or book title |
-| `n` | Number of recommendations, from 1 to 10; defaults to 5 |
+| `n` | Number of recommendations; defaults to `5`, with a documented maximum of `10` |
 
 Example:
 
@@ -206,7 +172,7 @@ Example:
 GET /api/recommend?q=animal%20farm&n=5
 ```
 
-A movie input produces book recommendations; a book input produces movie recommendations.
+A movie input returns book recommendations; a book input returns movie recommendations.
 
 ### `GET /health`
 
@@ -226,67 +192,92 @@ Example response:
 
 ## Catalog Updates and Embeddings
 
-### Data ingestion
+### Ingest New Records
 
-The project uses two ingestion scripts:
+The project includes ingestion scripts for its supported metadata sources:
 
-- `populate_books.py` retrieves books by subject from Open Library.
-- `populate_movies.py` retrieves movies by genre from TMDB.
+- `populate_books.py` retrieves books from Open Library.
+- `populate_movies.py` retrieves movies from TMDB.
 
-The scripts use persistent JSON files to track pagination progress between runs. Existing database records are ignored when they conflict with the database's uniqueness constraints.
+The scripts use JSON files to track pagination progress. Existing records may be skipped when they conflict with database uniqueness constraints, so the number of new records can be lower than the number fetched.
 
-The current ingestion configuration targets approximately 100 fetched book records and 100 fetched movie records per run. The number of newly inserted records can be lower because previously stored records may be encountered again.
+Offsets do not guarantee complete, duplicate-free collection because upstream catalog ordering and availability can change.
 
-Because upstream catalog ordering can change, offsets do not guarantee that every title will be collected exactly once.
+### Recalculate Embeddings
 
-### Recalculate embeddings
-
-After adding new media, run:
+After adding records, run:
 
 ```bash
 uv run python recalc.py
 ```
 
-The script regenerates embeddings for the movie, book, and song tables using the configured Sentence Transformer model.
+The script refreshes embeddings for the configured media tables. Check the script before running it to confirm which tables it updates and which model it uses.
 
-Recalculation refreshes stored embeddings; it does not automatically regenerate any separately stored recommendation rankings or training data.
+Embedding recalculation updates stored vectors; it does not necessarily retrain the reranker or regenerate separate ranking data.
 
-### Update script
+### Run the Update Script
 
-The repository includes `update.sh`, which runs these operations in sequence:
-
-1. Update the book catalog.
-2. Update the movie catalog.
-3. Recalculate embeddings.
-
-Run it manually with:
+If `update.sh` is present and configured for your machine, run:
 
 ```bash
 bash update.sh
 ```
 
-**Deployment note:** The current script contains a hard-coded working directory. Update that path to match your checkout before running it on another machine. A recurring schedule also needs to be configured separately.
+The update workflow is intended to ingest records and recalculate embeddings. Review the script before running it: if it contains a hard-coded directory, change that path to match your checkout.
+
+## Project Structure
+
+The exact structure may evolve. The main components described by this project include:
+
+```text
+REEL-RIOT/
+├── app.py                 # FastAPI application
+├── rec.py                 # Matching and recommendation logic
+├── model.py               # Model-related functionality
+├── recalc.py              # Embedding recalculation
+├── populate_books.py      # Open Library ingestion
+├── populate_movies.py     # TMDB ingestion
+├── update.sh              # Catalog update workflow
+├── book_offsets.json      # Book pagination progress
+├── movie_offsets.json     # Movie pagination progress
+├── reranker_model.pkl     # Trained reranking model
+├── media.db               # Local SQLite catalog
+├── pyproject.toml         # Project configuration and dependencies
+├── uv.lock                # Locked dependency versions
+├── templates/             # Jinja2 templates
+├── static/                # Frontend assets
+└── docs/images/           # README screenshots and demo media
+```
+
+Treat this as a guide, not a guarantee that every listed file is present in every checkout. Check the repository for the current layout before relying on a particular path.
 
 ## Current Limitations
 
-- **Local runtime assets:** The application depends on a compatible database and trained model.
-- **Deployment:** Public hosting and a self-contained setup process are not yet provided.
-- **Catalog freshness:** Pagination offsets help with incremental collection but cannot eliminate duplicates or skipped titles when upstream results change.
-- **Ranking maintenance:** New catalog entries need embeddings, and any required precomputed rankings must be refreshed separately.
-- **Development status:** Recommendation quality, catalog coverage, and deployment workflows remain areas for further development.
+- **Runtime assets:** The application depends on a compatible database and trained model.
+- **Setup:** A fresh clone may require manual preparation of the database and model files.
+- **Catalog coverage:** Incremental pagination can still miss or encounter duplicate items when upstream results change.
+- **Ranking maintenance:** New records need embeddings, and any separately maintained training or ranking data may require its own refresh process.
+- **Deployment:** The setup and deployment workflow is still being developed.
+- **Evaluation:** Recommendation quality and catalog coverage need continued testing.
 
 ## Roadmap
 
-- [ ] Add screenshots and a short animated demonstration.
-- [ ] Make local setup reproducible with a documented database initialization process.
+- [ ] Add and maintain screenshots and a short demo.
+- [ ] Document a reproducible database initialization process.
 - [ ] Make update scripts configurable across machines.
 - [ ] Automate recurring catalog maintenance.
-- [ ] Improve recommendation evaluation and ranking features.
-- [ ] Explore a low-cost public demo or self-hosted deployment guide.
+- [ ] Add evaluation metrics and examples for recommendation quality.
+- [ ] Document a deployment path for self-hosting or a public demo.
 
 ## Acknowledgments
 
 - [Open Library](https://openlibrary.org/) for book metadata.
 - [The Movie Database (TMDB)](https://www.themoviedb.org/) for movie metadata.
 - [Sentence Transformers](https://www.sbert.net/) for text embeddings.
-- [FastAPI](https://fastapi.tiangolo.com/) for the web application framework.
+- [FastAPI](https://fastapi.tiangolo.com/) for the web framework.
+- [RapidFuzz](https://github.com/rapidfuzz/RapidFuzz) for fuzzy title matching.
+- [uv](https://docs.astral.sh/uv/) for Python dependency management.
+
+---
+
+**REEL RIOT** — because your next favorite book might already be hiding in your favorite movie.
