@@ -1,3 +1,4 @@
+
 from sentence_transformers import SentenceTransformer
 import sentence_transformers
 import requests
@@ -6,10 +7,16 @@ from dotenv import load_dotenv
 import sqlite3
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
-conn = sqlite3.connect("media.db")
+BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
+DB_FILE = PROJECT_ROOT / "media.db"
+
+conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
+
 def save_embeddings(table_name, ids, embeddings):
     for row_id, embedding in zip(ids, embeddings):
         blob = np.array(embedding, dtype=np.float32).tobytes()

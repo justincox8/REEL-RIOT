@@ -10,11 +10,12 @@ load_dotenv()
 
 movie_key = os.getenv("MOVIE_KEY")
 
-# Keep the database and offsets file alongside this script.
 BASE_DIR = Path(__file__).resolve().parent
-OFFSETS_FILE = BASE_DIR / "movie_offsets.json"
-DB_FILE = BASE_DIR / "media.db"
+PROJECT_ROOT = BASE_DIR.parent
 
+
+OFFSETS_FILE = BASE_DIR / "movie_offsets.json"
+DB_FILE = PROJECT_ROOT / "media.db"
 conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
 
